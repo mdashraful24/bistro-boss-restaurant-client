@@ -1,3 +1,6 @@
+import profile from '../../assets/others/profile.png'
+// import profile from '../../assets/others/vector.png'
+
 const Navbar = () => {
 
     const navOptions = <>
@@ -7,7 +10,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="max-w-screen-xl mx-auto navbar fixed z-10 bg-[#151515] bg-opacity-40 font-bold uppercase">
+            <div className="max-w-screen-xl mx-auto navbar fixed z-10 bg-black bg-opacity-60 font-bold uppercase">
                 <div className="navbar-start pb-2">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,20 +33,26 @@ const Navbar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost md:text-xl text-white">
-                        Bistro Boss
-                        <br />
-                        Restaurant
-                    </a>
+                    <div className="text-[17px] md:text-xl text-white ">
+                        <p>Bistro Boss</p>
+                        <p className="text-xs md:text-sm">R e s t a u r a n t</p>
+                    </div>
                 </div>
                 {/* <div className="navbar-center hidden lg:flex"></div> */}
                 <div className="navbar-end">
                     <div className="hidden lg:flex">
-                        <ul className="menu menu-horizontal text-white px-5">
+                        <ul className="menu menu-horizontal text-white -mr-2">
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn">Button</a>
+                    <div className="flex items-center">
+                        <a className="btn bg-transparent border-0 text-white">SIGN OUT</a>
+                        <img
+                            className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-300"
+                            src={profile}
+                            alt="User profile"
+                        />
+                    </div>
                 </div>
             </div>
         </>
