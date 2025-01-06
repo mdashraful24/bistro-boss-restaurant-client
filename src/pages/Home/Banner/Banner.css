@@ -1,0 +1,16 @@
+.carousel .thumbs-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel .thumb {
+    margin: 0 5px;
+}
+
+.carousel .thumb img {
+    /* border-radius: 8px; */
+    /* border: 2px solid #ccc; */
+    /* width: 100px; */
+    /* height: 70px; */
+    object-fit: cover;
+}
