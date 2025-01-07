@@ -24,6 +24,16 @@ const Navbar = () => {
                     Our Menu
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    to="/order/salad"
+                    className={({ isActive }) =>
+                        isActive ? 'text-[#EEFF25]' : 'text-white'
+                    }
+                >
+                    Order
+                </NavLink>
+            </li>
         </>
     );
 
@@ -50,7 +60,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                            className="text-sm dropdown-content bg-black space-y-1.5 rounded-box z-[1] mt-3 w-32 p-2 shadow"
                         >
                             {navOptions}
                         </ul>
@@ -60,7 +70,6 @@ const Navbar = () => {
                         <p className="text-xs md:text-sm">R e s t a u r a n t</p>
                     </div>
                 </div>
-                {/* <div className="navbar-center hidden lg:flex"></div> */}
                 <div className="navbar-end space-x-7">
                     <div className="hidden lg:flex">
                         <ul className="flex items-center gap-5 text-white -mr-2">{navOptions}</ul>
