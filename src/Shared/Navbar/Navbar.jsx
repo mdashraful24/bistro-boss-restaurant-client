@@ -34,6 +34,26 @@ const Navbar = () => {
                     Order
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                        isActive ? 'text-[#EEFF25]' : 'text-white'
+                    }
+                >
+                    Login
+                </NavLink>
+            </li>
+            {/* <li>
+                <NavLink
+                    to="/signUp"
+                    className={({ isActive }) =>
+                        isActive ? 'text-[#EEFF25]' : 'text-white'
+                    }
+                >
+                    Sign In
+                </NavLink>
+            </li> */}
         </>
     );
 
@@ -75,7 +95,7 @@ const Navbar = () => {
                         <ul className="flex items-center gap-5 text-white -mr-2">{navOptions}</ul>
                     </div>
                     <div className="flex items-center gap-5">
-                        <a className="bg-transparent border-0 text-white">SIGN OUT</a>
+                        {/* <a className="bg-transparent border-0 text-white">SIGN OUT</a> */}
                         <img
                             className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-300"
                             src={profile}
