@@ -1,7 +1,24 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import profile from '../../assets/others/profile.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success("User signed out successfully");
+                navigate("/");
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
+    }
+
     const navOptions = (
         <>
             <li>
@@ -34,32 +51,28 @@ const Navbar = () => {
                     Order
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to="/login"
-                    className={({ isActive }) =>
-                        isActive ? 'text-[#EEFF25]' : 'text-white'
-                    }
-                >
-                    Login
-                </NavLink>
-            </li>
-            {/* <li>
-                <NavLink
-                    to="/signUp"
-                    className={({ isActive }) =>
-                        isActive ? 'text-[#EEFF25]' : 'text-white'
-                    }
-                >
-                    Sign In
-                </NavLink>
-            </li> */}
+            {
+                user ? <>
+                    <button onClick={handleLogOut} className='uppercase text-white'>Log Out</button>
+                </> : <>
+                    <li>
+                        <NavLink
+                            to="/login"
+                            className={({ isActive }) =>
+                                isActive ? 'text-[#EEFF25]' : 'text-white'
+                            }
+                        >
+                            Login
+                        </NavLink>
+                    </li>
+                </>
+            }
         </>
     );
 
     return (
         <>
-            <div className="max-w-screen-xl mx-auto navbar fixed z-10 bg-black bg-opacity-60 font-bold uppercase">
+            <div className="max-w-screen-xl mx-auto navbar fixed z-10 bg-black bg-opacity-60 font-bold uppercase lg:px-5">
                 <div className="navbar-start pb-2">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -80,7 +93,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="text-sm dropdown-content bg-black space-y-1.5 rounded-box z-[1] mt-3 w-32 p-2 shadow"
+                            className="text-sm dropdown-content bg-black space-y-2 rounded-box z-[1] mt-3 w-32 p-5 shadow"
                         >
                             {navOptions}
                         </ul>
@@ -95,11 +108,10 @@ const Navbar = () => {
                         <ul className="flex items-center gap-5 text-white -mr-2">{navOptions}</ul>
                     </div>
                     <div className="flex items-center gap-5">
-                        {/* <a className="bg-transparent border-0 text-white">SIGN OUT</a> */}
                         <img
-                            className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-300"
-                            src={profile}
-                            alt="User profile"
+                            className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-500"
+                            src={user && user?.photoURL ? user?.photoURL : profile}
+                            alt={user && user.displayName ? user.displayName : "User profile"}
                         />
                     </div>
                 </div>

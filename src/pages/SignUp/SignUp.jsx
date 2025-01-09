@@ -3,20 +3,54 @@ import loginImg from '../../../src/assets/others/authentication2.png'
 import bgImg from '../../../src/assets/others/authentication.png'
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors }, } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
+    const { setUser, createUser, handleGoogleSignIn, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
+    // Submit Form
     const onSubmit = (data) => {
         createUser(data.email, data.password)
-            .then(result => {
+            .then((result) => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
+                console.log("User created:", loggedUser);
+                setUser(loggedUser);
+
+                // New Technique
+                // updateUserProfile(data.name, data.photoURL);
+
+                // Old Technique
+                updateUserProfile(data.name, data.photo);
+                return updateUserProfile({ displayName: data.name, photoURL: data.photo });
             })
+            .then(() => {
+                toast.success("Successfully Sign Up");
+                reset();
+                navigate("/");
+            })
+            .catch((error) => {
+                toast.error("Email has already been used.");
+            });
+    };
+
+    // Google Sign In
+    const handleGoogleSignInClickReg = () => {
+        handleGoogleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                toast.success("Successfully Sign-In with Google");
+                navigate("/");
+            })
+            .catch(error => {
+                console.error("Google Sign-In Error:", error);
+                toast.error(error.message || "Google Sign-In failed.");
+            });
     }
 
     return (
@@ -66,6 +100,34 @@ const SignUp = () => {
                                     placeholder="Type here" className="input input-bordered rounded-md" />
                                 {errors.email && <span className="text-red-600">Email is required</span>}
                             </div>
+
+                            {/* Photo URL */}
+
+                            {/* New Technique */}
+                            {/* <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input
+                                    type="text" {...register("photoURL", { required: true })}
+                                    placeholder="Photo URL"
+                                    className="input input-bordered rounded-md" />
+                                {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
+                            </div> */}
+
+                            {/* Old Technique */}
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input
+                                    type="photo" {...register("photo", { required: true })}
+                                    name="photo"
+                                    placeholder="Photo URL"
+                                    className="input input-bordered rounded-md" />
+                                {errors.photo && <span className="text-red-600">Photo URL is required</span>}
+                            </div>
+
                             {/* Password */}
                             <div className="form-control">
                                 <label className="label">
@@ -100,18 +162,18 @@ const SignUp = () => {
 
                             {/* Other Options */}
                             <div className='text-center font-semibold mt-2'>
-                                <p className='text-[#d19f54] mb-1'><small>Already registered? <span className='hover:text-red-500 mb-2'><Link to="/login">Go to log in</Link></span></small></p>
-                                <small>Or sign up with</small>
+                                <p className='text-[#d19f54] mb-1'><small>Already Sign Up? <span className='hover:text-red-500 mb-2'><Link to="/login">Go to log in</Link></span></small></p>
+                                <small>Or sign In with</small>
                                 <div>
                                     {/* Social */}
                                     <div className="flex justify-center items-center gap-8 md:gap-10 mt-4">
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black">
+                                        <div onClick={handleGoogleSignInClickReg} className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaFacebookF />
                                         </div>
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaGoogle />
                                         </div>
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaGithub />
                                         </div>
                                     </div>
