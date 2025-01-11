@@ -7,8 +7,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const { setUser, createUser, handleGoogleSignIn, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -18,7 +21,7 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then((result) => {
                 const loggedUser = result.user;
-                console.log("User created:", loggedUser);
+                // console.log("User created:", loggedUser);
                 setUser(loggedUser);
 
                 // New Technique
@@ -29,9 +32,20 @@ const SignUp = () => {
                 return updateUserProfile({ displayName: data.name, photoURL: data.photo });
             })
             .then(() => {
-                toast.success("Successfully Sign Up");
-                reset();
-                navigate("/");
+                // Create user entry in the database
+                const userInfo = {
+                    name: data.name,
+                    email: data.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log("user added to the database");
+                            reset();
+                            toast.success("Successfully Sign Up");
+                            navigate("/");
+                        }
+                    })
             })
             .catch((error) => {
                 toast.error("Email has already been used.");
@@ -39,19 +53,19 @@ const SignUp = () => {
     };
 
     // Google Sign In
-    const handleGoogleSignInClickReg = () => {
-        handleGoogleSignIn()
-            .then(result => {
-                const user = result.user;
-                setUser(user);
-                toast.success("Successfully Sign-In with Google");
-                navigate("/");
-            })
-            .catch(error => {
-                console.error("Google Sign-In Error:", error);
-                toast.error(error.message || "Google Sign-In failed.");
-            });
-    }
+    // const handleGoogleSignInClickReg = () => {
+    //     handleGoogleSignIn()
+    //         .then(result => {
+    //             const user = result.user;
+    //             setUser(user);
+    //             toast.success("Successfully Sign-In with Google");
+    //             navigate("/");
+    //         })
+    //         .catch(error => {
+    //             console.error("Google Sign-In Error:", error);
+    //             toast.error(error.message || "Google Sign-In failed.");
+    //         });
+    // }
 
     return (
         <>
@@ -167,11 +181,12 @@ const SignUp = () => {
                                 <div>
                                     {/* Social */}
                                     <div className="flex justify-center items-center gap-8 md:gap-10 mt-4">
-                                        <div onClick={handleGoogleSignInClickReg} className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
+                                        <SocialLogin></SocialLogin>
+                                        {/* <div onClick={handleGoogleSignInClickReg} className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaFacebookF />
-                                        </div>
+                                        </div> */}
                                         <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
-                                            <FaGoogle />
+                                            <FaFacebookF />
                                         </div>
                                         <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaGithub />

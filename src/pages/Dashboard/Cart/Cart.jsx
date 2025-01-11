@@ -38,7 +38,7 @@ const Cart = () => {
     return (
         <div className="mb-16">
             <SectionTitle
-                subHeading={"---My Cart---"}
+                subHeading={"My Cart"}
                 heading={"WANNA ADD MORE?"}
             ></SectionTitle>
             <div className="bg-white px-8 py-2">

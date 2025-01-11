@@ -9,6 +9,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const captchaRef = useRef(null);
@@ -19,6 +20,9 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
+
+
+    const from = location.state?.from?.pathname || "/";
 
     // Load 6 Captcha
     useEffect(() => {
@@ -46,7 +50,7 @@ const Login = () => {
                 // navigate(location?.state ? location.state : "/");
                 // New Technique
                 console.log('state in the location login page', location.state);
-                const from = location.state?.from?.pathname || "/";
+                // const from = location.state?.from?.pathname || "/";
                 navigate(from, { replace: true });
             })
             .catch(err => {
@@ -56,20 +60,20 @@ const Login = () => {
     }
 
     // Google Sign In
-    const handleGoogleSignInClick = () => {
-        handleGoogleSignIn()
-            .then(result => {
-                const user = result.user;
-                setUser(user);
-                toast.success("Successfully! Login with Google");
-                // navigate(location?.state ? location.state : "/");
-                navigate(fromJSON, { replace: true });
-            })
-            .catch(error => {
-                setError({ ...error, google: error.message });
-                toast.error("Google Sign-In Failed. Please try again.");
-            })
-    }
+    // const handleGoogleSignInClick = () => {
+    //     handleGoogleSignIn()
+    //         .then(result => {
+    //             const user = result.user;
+    //             setUser(user);
+    //             toast.success("Successfully! Login with Google");
+    //             // navigate(location?.state ? location.state : "/");
+    //             navigate(from, { replace: true });
+    //         })
+    //         .catch(error => {
+    //             setError({ ...error, google: error.message });
+    //             toast.error("Google Sign-In Failed. Please try again.");
+    //         })
+    // }
 
     // Captcha Validation
     // const handleValidateCaptcha = (event) => {
@@ -188,11 +192,15 @@ const Login = () => {
                                 <div>
                                     {/* Social */}
                                     <div className="flex justify-center items-center gap-8 md:gap-10 mt-4">
-                                        <div onClick={handleGoogleSignInClick} className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
+
+                                        {/* Just Module type */}
+                                        <SocialLogin></SocialLogin>
+
+                                        {/* <div onClick={handleGoogleSignInClick} className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaFacebookF />
-                                        </div>
+                                        </div> */}
                                         <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
-                                            <FaGoogle />
+                                            <FaFacebookF />
                                         </div>
                                         <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer">
                                             <FaGithub />

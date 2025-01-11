@@ -14,7 +14,9 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut()
             .then(() => {
-                toast.success("User signed out successfully");
+                toast.success(`Signed out "${user.email}"`, {
+                    position: "top-right",
+                });
                 navigate("/");
             })
             .catch(error => {
@@ -55,7 +57,7 @@ const Navbar = () => {
                 </NavLink>
             </li>
             <li>
-                <Link to="/dashboard/cart">
+                <Link to="/dashboard">
                     <button className="flex items-center gap-2">
                         <FaCartShopping />
                         <div className="badge badge-secondary">+{cart.length}</div>

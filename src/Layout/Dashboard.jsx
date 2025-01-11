@@ -1,13 +1,16 @@
 import { BsCalendar2CheckFill } from "react-icons/bs";
-import { FaCalendarAlt, FaHome, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+import { FaBook, FaCalendarAlt, FaEnvelope, FaHome, FaListUl, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
 import { MdRateReview } from "react-icons/md";
-import { TbMailFilled } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart();
+
+    // TODO: get isAdmin value from the database
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">
@@ -21,23 +24,30 @@ const Dashboard = () => {
 
                 {/* Dashboard item title */}
                 <ul className="menu">
-                    <li>
-                        <NavLink to="/dashboard/userHome"><FaHome />User Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/review"><MdRateReview />Add Review</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/bookings"><BsCalendar2CheckFill />My Booking</NavLink>
-                    </li>
+                    {
+                        isAdmin ? <>
+                            <li>
+                                <NavLink to="/dashboard/adminHome"><FaHome />Admin Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/addItems"><FaUtensils />Add Items</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageItems"><FaListUl />Manage Items</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/bookings"><FaBook />Manage Bookings</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/users"><FaUsers />All Users</NavLink>
+                            </li>
+                        </> : <></>
+                    }
+
                     {/* Divider */}
                     {/* <div className="divider divider-neutral"></div> */}
+
+                    {/* Sheared nav links */}
                     <div class="bg-white h-[2px] my-4"></div>
                     <li>
                         <NavLink to="/"><FaHome />Home</NavLink>
@@ -49,7 +59,7 @@ const Dashboard = () => {
                         <NavLink to="/order"><FaShoppingBag />Shop</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/"><TbMailFilled />Contact</NavLink>
+                        <NavLink to="/contact"><FaEnvelope />Contact</NavLink>
                     </li>
                 </ul>
             </div>
