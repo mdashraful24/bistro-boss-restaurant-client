@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import RecommendCard from "../../../Shared/RecommendCard/RecommendCard";
+import FoodCard from "../../../Shared/FoodCard/FoodCard";
 
 const Recommends = () => {
 
-    const [recommends, setRecommends] = useState([]);
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         fetch('menu.json')
             .then(res => res.json())
             .then(data => {
-                setRecommends(data.slice(0, 3));
+                setItems(data.slice(0, 3));
             })
     }, [])
 
@@ -23,7 +24,8 @@ const Recommends = () => {
 
             <div className="grid md:grid-cols-3 gap-10">
                 {
-                    recommends.map(recommend => <RecommendCard key={recommend._id} recommend={recommend}></RecommendCard>)
+                    items.map(item => <FoodCard key={item._id} item={item}></FoodCard>)
+                    // recommends.map(recommend => <RecommendCard key={recommend._id} recommend={recommend}></RecommendCard>)
                 }
             </div>
         </section>

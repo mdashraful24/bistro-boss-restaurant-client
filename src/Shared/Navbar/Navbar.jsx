@@ -1,11 +1,14 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import profile from '../../assets/others/profile.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { FaCartShopping } from 'react-icons/fa6';
+import useCart from '../../hooks/useCart';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
     const navigate = useNavigate();
 
     const handleLogOut = () => {
@@ -50,6 +53,14 @@ const Navbar = () => {
                 >
                     Order
                 </NavLink>
+            </li>
+            <li>
+                <Link to="/dashboard/cart">
+                    <button className="flex items-center gap-2">
+                        <FaCartShopping />
+                        <div className="badge badge-secondary">+{cart.length}</div>
+                    </button>
+                </Link>
             </li>
             {
                 user ? <>

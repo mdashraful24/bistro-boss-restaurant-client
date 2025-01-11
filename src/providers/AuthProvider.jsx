@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
     const updateUserProfile = (updatedData) => {
         return updateProfile(auth.currentUser, updatedData);
     }
-
     // New Technique
     // const updateUserProfile = (name, photo) => {
     //     return updateProfile(auth.currentUser, {

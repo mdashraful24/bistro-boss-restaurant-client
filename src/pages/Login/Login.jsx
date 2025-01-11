@@ -15,12 +15,10 @@ const Login = () => {
     const [disable, setDisable] = useState(true);
     const [error, setError] = useState({});
     const [showPassWord, setShowPassword] = useState(false);
+    const { signIn, setUser, handleGoogleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const { signIn, setUser, handleGoogleSignIn } = useContext(AuthContext);
-
-    // New Technique
-    // const from = location.state?.from?.pathname || "/";
+    console.log(location);
 
     // Load 6 Captcha
     useEffect(() => {
@@ -43,10 +41,13 @@ const Login = () => {
                     text: `Hello, ${user?.displayName || user?.email}`,
                     icon: 'success',
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1500,
                 });
-                navigate(location?.state ? location.state : "/");
-                // navigate(fromJSON, {replace: true});
+                // navigate(location?.state ? location.state : "/");
+                // New Technique
+                console.log('state in the location login page', location.state);
+                const from = location.state?.from?.pathname || "/";
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 setError({ login: "Please check your email or password." });
@@ -61,7 +62,8 @@ const Login = () => {
                 const user = result.user;
                 setUser(user);
                 toast.success("Successfully! Login with Google");
-                navigate(location?.state ? location.state : "/");
+                // navigate(location?.state ? location.state : "/");
+                navigate(fromJSON, { replace: true });
             })
             .catch(error => {
                 setError({ ...error, google: error.message });
@@ -165,14 +167,16 @@ const Login = () => {
                                 <input
                                     type="text"
                                     ref={captchaRef}
-                                    name="captcha" placeholder="Type here" className="input input-bordered rounded-md" required />
+                                    name="captcha" placeholder="Type here" className="input input-bordered rounded-md" />
+                                {/* TODO: write "required" */}
                                 <button onClick={(event) => handleValidateCaptcha(event)} className='btn btn-outline btn-xs w-20 mt-3 rounded-md'>Validate</button>
                             </div>
 
                             {/* Button */}
                             <div className="form-control mt-6">
+                                {/* TODO: apply disabled for re-captcha "disable" */}
                                 <input
-                                    disabled={disable}
+                                    disabled={false}
                                     className="btn bg-[#D1A054B3] hover:bg-[#D1A054B3] rounded-md" type="submit"
                                     value="Sign In" />
                             </div>
