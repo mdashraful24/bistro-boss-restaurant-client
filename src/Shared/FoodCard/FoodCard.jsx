@@ -24,7 +24,7 @@ const FoodCard = ({ item }) => {
             }
             axiosSecure.post('/carts', cartItem)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     if (res.data.insertedId) {
                         Swal.fire({
                             // position: "top-center",
@@ -60,7 +60,7 @@ const FoodCard = ({ item }) => {
     return (
         <div className="card bg-[#F3F3F3] rounded-none">
             <figure>
-                <img className="w-full object-cover" src={image} alt="" />
+                <img className="w-full h-full md:h-60 object-cover" src={image} alt="" />
             </figure>
             <p className="absolute right-0 mr-4 mt-4 bg-[#111827] text-white px-3 py-1.5">${price}</p>
             <div className="p-5 flex flex-col justify-between flex-grow text-center">

@@ -19,7 +19,7 @@ const Login = () => {
     const { signIn, setUser, handleGoogleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
 
     const from = location.state?.from?.pathname || "/";
@@ -38,7 +38,7 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
+                // console.log(user)
                 setUser(user);
                 Swal.fire({
                     title: `Welcome "${user?.displayName}"`,
@@ -49,7 +49,7 @@ const Login = () => {
                 });
                 // navigate(location?.state ? location.state : "/");
                 // New Technique
-                console.log('state in the location login page', location.state);
+                // console.log('state in the location login page', location.state);
                 // const from = location.state?.from?.pathname || "/";
                 navigate(from, { replace: true });
             })
@@ -93,7 +93,7 @@ const Login = () => {
     const handleValidateCaptcha = (event) => {
         event.preventDefault();
         const user_captcha_value = captchaRef.current.value;
-        console.log(user_captcha_value);
+        // console.log(user_captcha_value);
 
         if (validateCaptcha(user_captcha_value)) {
             setDisable(false);

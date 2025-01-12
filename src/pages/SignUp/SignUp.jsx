@@ -40,7 +40,7 @@ const SignUp = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
-                            console.log("user added to the database");
+                            // console.log("user added to the database");
                             reset();
                             toast.success("Successfully Sign Up");
                             navigate("/");

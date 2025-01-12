@@ -15,14 +15,14 @@ const SocialLogin = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 const userInfo = {
                     email: result.user?.email,
                     name: result.user?.displayName
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         toast.success("Successfully Sign-In with Google");
                         navigate(from, { replace: true });
                         // navigate("/");

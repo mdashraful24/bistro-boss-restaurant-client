@@ -36,7 +36,7 @@ const Dashboard = () => {
                                 <NavLink to="/dashboard/manageItems"><FaListUl />Manage Items</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/bookings"><FaBook />Manage Bookings</NavLink>
+                                <NavLink to="/dashboard/manageBookings"><FaBook />Manage Bookings</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/dashboard/users"><FaUsers />All Users</NavLink>
@@ -48,7 +48,7 @@ const Dashboard = () => {
                     {/* <div className="divider divider-neutral"></div> */}
 
                     {/* Sheared nav links */}
-                    <div class="bg-white h-[2px] my-4"></div>
+                    <div className="bg-white h-[2px] my-4"></div>
                     <li>
                         <NavLink to="/"><FaHome />Home</NavLink>
                     </li>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Dashboard content */}
-            <div className="flex-1 px-10 bg-gray-100">
+            <div className="flex-1 px-10 bg-gray-50">
                 <Outlet></Outlet>
             </div>
         </div>
@@ -72,3 +72,24 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+{/* <li>
+                                <NavLink to="/dashboard/userHome"><FaHome />User Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/reservation"><IoWallet />Payment History</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/review"><MdRateReview />Add Review</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/bookings"><BsCalendar2CheckFill />My Booking</NavLink>
+                            </li> */}
