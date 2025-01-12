@@ -17,7 +17,7 @@ const UpdateItem = () => {
     const axiosSecure = useAxiosSecure();
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         // image upload to imgBB and then get an url
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -35,7 +35,7 @@ const UpdateItem = () => {
                 image: res.data.data.display_url
             }
             const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
-            console.log(menuRes.data)
+            // console.log(menuRes.data)
             if (menuRes.data.modifiedCount > 0) {
                 // show success popup
                 // reset();
@@ -48,7 +48,7 @@ const UpdateItem = () => {
                 });
             }
         }
-        console.log('with image url', res.data);
+        // console.log('with image url', res.data);
     };
 
     return (

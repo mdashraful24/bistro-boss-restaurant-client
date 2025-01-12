@@ -18,7 +18,7 @@ const AddItems = () => {
     const uploadedImage = watch("image");
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
 
         // Get the image file
         const imageFile = data.image[0];
@@ -48,7 +48,7 @@ const AddItems = () => {
                 };
 
                 const menuRes = await axiosSecure.post('/menu', menuItem);
-                console.log(menuRes.data);
+                // console.log(menuRes.data);
 
                 if (menuRes.data.insertedId) {
                     // Show success popup
