@@ -1,6 +1,6 @@
 import { BsCalendar2CheckFill } from "react-icons/bs";
 import { FaBook, FaCalendarAlt, FaEnvelope, FaHome, FaListUl, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
-import { IoMdMenu } from "react-icons/io";
+import { IoWallet } from "react-icons/io5";
 import { MdMenuBook, MdRateReview } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
@@ -41,7 +41,26 @@ const Dashboard = () => {
                             <li>
                                 <NavLink to="/dashboard/users"><FaUsers />All Users</NavLink>
                             </li>
-                        </> : <></>
+                        </> : <>
+                                <li>
+                                    <NavLink to="/dashboard/userHome"><FaHome />User Home</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/paymentHistory"><IoWallet />Payment History</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/review"><MdRateReview />Add Review</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/bookings"><BsCalendar2CheckFill />My Booking</NavLink>
+                                </li> 
+                        </>
                     }
 
                     {/* Divider */}
@@ -55,7 +74,7 @@ const Dashboard = () => {
                         <NavLink to="/menu"><MdMenuBook />Menu</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/order"><FaShoppingBag />Shop</NavLink>
+                        <NavLink to="/order/salad"><FaShoppingBag />Shop</NavLink>
                     </li>
                     <li>
                         <NavLink to="/contact"><FaEnvelope />Contact</NavLink>
