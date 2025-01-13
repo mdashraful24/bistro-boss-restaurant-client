@@ -1,7 +1,7 @@
 import { BsCalendar2CheckFill } from "react-icons/bs";
 import { FaBook, FaCalendarAlt, FaEnvelope, FaHome, FaListUl, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
-import { MdRateReview } from "react-icons/md";
+import { MdMenuBook, MdRateReview } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
@@ -45,15 +45,14 @@ const Dashboard = () => {
                     }
 
                     {/* Divider */}
-                    {/* <div className="divider divider-neutral"></div> */}
+                    <div className="bg-black h-[1.5px] my-4"></div>
 
                     {/* Sheared nav links */}
-                    <div className="bg-white h-[2px] my-4"></div>
                     <li>
                         <NavLink to="/"><FaHome />Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/menu"><IoMdMenu />Menu</NavLink>
+                        <NavLink to="/menu"><MdMenuBook />Menu</NavLink>
                     </li>
                     <li>
                         <NavLink to="/order"><FaShoppingBag />Shop</NavLink>

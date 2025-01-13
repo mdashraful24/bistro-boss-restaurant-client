@@ -56,7 +56,7 @@ const Navbar = () => {
                     Order
                 </NavLink>
             </li>
-            <li>
+            {/* <li>
                 <Link to="/dashboard">
                     <button className="flex items-center gap-2">
                         <FaCartShopping />
@@ -79,7 +79,7 @@ const Navbar = () => {
                         </NavLink>
                     </li>
                 </>
-            }
+            } */}
         </>
     );
 
@@ -120,6 +120,36 @@ const Navbar = () => {
                     <div className="hidden lg:flex">
                         <ul className="flex items-center gap-5 text-white -mr-2">{navOptions}</ul>
                     </div>
+
+                    {/* Dashboard */}
+                    <div>
+                        <Link to="/dashboard">
+                            <button className="flex items-center gap-2 text-white">
+                                <FaCartShopping />
+                                <div className="badge badge-secondary">+{cart.length}</div>
+                            </button>
+                        </Link>
+                    </div>
+                    
+                    {/* Logout */}
+                    {
+                        user ? <>
+                            <button onClick={handleLogOut} className='uppercase text-white'>Log Out</button>
+                        </> : <>
+                            <div>
+                                <NavLink
+                                    to="/login"
+                                    className={({ isActive }) =>
+                                        isActive ? 'text-[#EEFF25]' : 'text-white'
+                                    }
+                                >
+                                    Login
+                                </NavLink>
+                            </div>
+                        </>
+                    }
+
+                    {/* User avatar */}
                     <div className="flex items-center gap-5">
                         <img
                             className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-500"
