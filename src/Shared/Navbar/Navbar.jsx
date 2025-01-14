@@ -5,9 +5,11 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-toastify';
 import { FaCartShopping } from 'react-icons/fa6';
 import useCart from '../../hooks/useCart';
+import useAdmin from '../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const [cart] = useCart();
     const navigate = useNavigate();
 
@@ -56,6 +58,17 @@ const Navbar = () => {
                     Order
                 </NavLink>
             </li>
+
+            {
+                // user ? condition ? 'double true' : 'one true' : 'false'
+            }
+            {
+                user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>
+            }
+            {
+                user && !isAdmin && <li><Link to="/dashboard/userHome">Dashboard</Link></li>
+            }
+
             {/* <li>
                 <Link to="/dashboard">
                     <button className="flex items-center gap-2">
@@ -122,15 +135,19 @@ const Navbar = () => {
                     </div>
 
                     {/* Dashboard */}
-                    <div>
-                        <Link to="/dashboard">
-                            <button className="flex items-center gap-2 text-white">
-                                <FaCartShopping />
-                                <div className="badge badge-secondary">+{cart.length}</div>
-                            </button>
-                        </Link>
+                    {/* <div className='relative'>
+                        <button className="flex items-center gap-2 text-white">
+                            <FaCartShopping />
+                            <div className="badge badge-secondary">+{cart.length}</div>
+                        </button>
+                    </div> */}
+                    <div className='relative'>
+                        <div className="flex items-center gap-2 text-white rtl">
+                            <span className='text-lg'><FaCartShopping /></span>
+                            <div className="absolute -inset-1 start-2 transform translate-x-1/2 -translate-y-1/2">+{cart.length}</div>
+                        </div>
                     </div>
-                    
+
                     {/* Logout */}
                     {
                         user ? <>
@@ -150,9 +167,9 @@ const Navbar = () => {
                     }
 
                     {/* User avatar */}
-                    <div className="flex items-center gap-5">
+                    <div>
                         <img
-                            className="rounded-full w-9 md:w-11 h-9 md:h-11 object-cover cursor-pointer p-1 hover:bg-gray-500"
+                            className="rounded-full w-9 h-9 md:w-12 md:h-12 object-cover cursor-pointer p-1 hover:bg-gray-500"
                             src={user && user?.photoURL ? user?.photoURL : profile}
                             alt={user && user.displayName ? user.displayName : "User profile"}
                         />
