@@ -63,45 +63,40 @@ const Navbar = () => {
                 // user ? condition ? 'double true' : 'one true' : 'false'
             }
             {
-                user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>
+                user && isAdmin &&
+                <li>
+                    <NavLink
+                        to="/dashboard/adminHome"
+                        className={({ isActive }) =>
+                            isActive ? 'text-[#EEFF25]' : 'text-white'
+                        }
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
             }
             {
-                user && !isAdmin && <li><Link to="/dashboard/userHome">Dashboard</Link></li>
+                user && !isAdmin &&
+                <li>
+                    <NavLink
+                        to="/dashboard/userHome"
+                        className={({ isActive }) =>
+                            isActive ? 'text-[#EEFF25]' : 'text-white'
+                        }
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
             }
-
-            {/* <li>
-                <Link to="/dashboard">
-                    <button className="flex items-center gap-2">
-                        <FaCartShopping />
-                        <div className="badge badge-secondary">+{cart.length}</div>
-                    </button>
-                </Link>
-            </li>
-            {
-                user ? <>
-                    <button onClick={handleLogOut} className='uppercase text-white'>Log Out</button>
-                </> : <>
-                    <li>
-                        <NavLink
-                            to="/login"
-                            className={({ isActive }) =>
-                                isActive ? 'text-[#EEFF25]' : 'text-white'
-                            }
-                        >
-                            Login
-                        </NavLink>
-                    </li>
-                </>
-            } */}
         </>
     );
 
     return (
         <>
             <div className="max-w-screen-xl mx-auto navbar fixed z-10 bg-black bg-opacity-60 font-bold uppercase lg:px-5">
-                <div className="navbar-start pb-2">
+                <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden pl-0">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 text-white"
@@ -124,9 +119,9 @@ const Navbar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <div className="text-[17px] md:text-xl text-white">
+                    <div className="text-[14px] md:text-xl text-white">
                         <p>Bistro Boss</p>
-                        <p className="text-xs md:text-sm">R e s t a u r a n t</p>
+                        <p className="text-[10px] md:text-sm">R e s t a u r a n t</p>
                     </div>
                 </div>
                 <div className="navbar-end space-x-7">
@@ -134,24 +129,19 @@ const Navbar = () => {
                         <ul className="flex items-center gap-5 text-white -mr-2">{navOptions}</ul>
                     </div>
 
-                    {/* Dashboard */}
-                    {/* <div className='relative'>
-                        <button className="flex items-center gap-2 text-white">
-                            <FaCartShopping />
-                            <div className="badge badge-secondary">+{cart.length}</div>
-                        </button>
-                    </div> */}
-                    <div className='relative'>
-                        <div className="flex items-center gap-2 text-white rtl">
-                            <span className='text-lg'><FaCartShopping /></span>
-                            <div className="absolute -inset-1 start-2 transform translate-x-1/2 -translate-y-1/2">+{cart.length}</div>
+                    <Link to="/dashboard/cart">
+                        <div className='relative'>
+                            <div className="flex items-center gap-2 text-white rtl">
+                                <span className='text-lg'><FaCartShopping /></span>
+                                <div className="absolute -inset-1 start-2 transform translate-x-1/2 -translate-y-1/2">+{cart.length}</div>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Logout */}
                     {
                         user ? <>
-                            <button onClick={handleLogOut} className='uppercase text-white'>Log Out</button>
+                            <button onClick={handleLogOut} className='uppercase text-xs md:text-base text-white'>Log Out</button>
                         </> : <>
                             <div>
                                 <NavLink
@@ -169,7 +159,7 @@ const Navbar = () => {
                     {/* User avatar */}
                     <div>
                         <img
-                            className="rounded-full w-9 h-9 md:w-12 md:h-12 object-cover cursor-pointer p-1 hover:bg-gray-500"
+                            className="rounded-full w-8 h-8 object-cover cursor-pointer hover:bg-gray-500"
                             src={user && user?.photoURL ? user?.photoURL : profile}
                             alt={user && user.displayName ? user.displayName : "User profile"}
                         />
