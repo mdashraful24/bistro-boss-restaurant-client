@@ -1,4 +1,4 @@
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ const SocialLogin = () => {
                 onClick={handleGoogleSignIn}
                 className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-black cursor-pointer hover:bg-[#D1A054B3] hover:border-[#D1A054B3] hover:scale-110 transition-transform  duration-300"
             >
-                <FaGoogle />
+                <FcGoogle />
             </div>
         </div>
     );
