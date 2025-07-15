@@ -159,8 +159,8 @@ To build and preview the production-ready application:
 
 - This project currently does not have an automated testing setup. If you plan to add tests, feel free to implement your preferred testing framework (e.g., Jest, Mocha).
 
-## Admin Related Info:
+<!-- ## Admin Related Info:
 
   - **Username**: 
   - **Email**: 
-  - **Password**: 
+  - **Password**:  -->
