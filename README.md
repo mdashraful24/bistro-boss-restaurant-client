@@ -1,6 +1,6 @@
 # Bistro Boss Restaurant
 
-![Bistro Boss Banner](https://i.ibb.co.com/1YGgjn71/Screenshot-82.png)
+![Bistro Boss Banner](https://drive.google.com/uc?export=view&id=1b-9UkRV9DCnG24cTnYvQmmWIZQ9C6aX4)
 
 Welcome to **Bistro Boss Restaurant**, a modern, feature-rich web application designed to streamline the restaurant experience for both customers and restaurant owners. Built with the latest web technologies, our platform allows seamless menu browsing, online ordering, and payment processing, ensuring an exceptional user experience.
 
