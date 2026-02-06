@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import orderCover from '../../../assets/shop/order.jpg'
 import Cover from '../../../Shared/Cover/Cover';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMenu from '../../../hooks/UseMenu';
 import OrderTab from '../OrderTab/OrderTab';
 import { useParams } from 'react-router-dom';
@@ -20,6 +20,10 @@ const Order = () => {
     const soup = menu.filter(item => item.category === "soup");
     const salad = menu.filter(item => item.category === "salad");
     const drink = menu.filter(item => item.category === "drinks");
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div>
