@@ -19,7 +19,10 @@ const SSLCommerz = () => {
                 status: "pending",
             };
 
-            const { data } = await axios.post('http://localhost:5000/create-ssl-payment', payment);
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}/create-ssl-payment`,
+                payment
+            );
 
             if (data?.GatewayPageURL) {
                 window.location.href = data.GatewayPageURL;
